@@ -1,0 +1,172 @@
+{
+ "schema": "aice-asso-meta/2",
+ "model_seed": 0,
+ "tf_seed": 42,
+ "exam_id": "AICE_Asso_015_초급_분류_주식종목평가",
+ "seed": 91028,
+ "company": "봄내캐피탈",
+ "domain": "stock",
+ "domain_title": "주식 종목 평가",
+ "track": "clf2",
+ "label_style": "string",
+ "name_style": "title",
+ "var_style": "B",
+ "target": "Up_Flag",
+ "n_rows": 724,
+ "n_cols": 12,
+ "columns": [
+  "Reg_No",
+  "Ret_1m",
+  "Pbr",
+  "Turnover",
+  "Foreign_Ratio",
+  "Debt_Ratio",
+  "Roe",
+  "Analyst_Cnt",
+  "Sector",
+  "Cap_Class",
+  "Exchange",
+  "Up_Flag"
+ ],
+ "flags": [
+  "outlier_both"
+ ],
+ "data_files": [
+  "data.csv"
+ ],
+ "data_file_format": "fmt_csv",
+ "picks": {
+  "1": "IMP.alias.pandas",
+  "2": "LOAD.read_csv",
+  "3": "VIZ.countplot_value",
+  "4": "VIZ.boxplot",
+  "5": "PREP.outlier_iqr_drop",
+  "6": "PREP.na_dropna_subset",
+  "7": "PREP.encode_label",
+  "8": "SPLIT.holdout",
+  "9": "SCALE.minmax",
+  "10": "ML.gs_dt_rf",
+  "11": "FI.rf_barplot",
+  "12": "EVAL.model_score",
+  "13": "DL.design_fill",
+  "14": "DLV.plot_fill"
+ },
+ "namespace_ids": [
+  "DATA.domain.stock",
+  "TRACK.clf2",
+  "STYLE.name.title",
+  "STYLE.var.B",
+  "DATA.fmt.csv",
+  "PARAM.seed.model.0",
+  "PARAM.seed.tf.42",
+  "DATA.label.string",
+  "DATA.quirk.outlier_both",
+  "IMP.alias.pandas",
+  "ANS.blank",
+  "ANS.blank.synth",
+  "V6.linked",
+  "V6.hint_fullcode",
+  "LOAD.read_csv",
+  "LOAD.value.cols",
+  "ANS.value",
+  "VIZ.countplot_value",
+  "VIZ.boxplot",
+  "PREP.outlier_iqr_drop",
+  "PREP.outlier_k.3_0",
+  "PREP.na_dropna_subset",
+  "PREP.encode_label",
+  "SPLIT.holdout",
+  "SCALE.minmax",
+  "ML.gs_dt_rf",
+  "ML.scoring.roc_auc",
+  "ML.model.DecisionTreeClassifier",
+  "ML.model.RandomForestClassifier",
+  "ML.q.total_fits",
+  "FI.rf_barplot",
+  "EVAL.model_score",
+  "DL.design_fill",
+  "DL.act.relu",
+  "DL.opt.rmsprop",
+  "DL.units.A",
+  "DL.fit.verbose0",
+  "DLV.plot_fill"
+ ],
+ "attempts": 1,
+ "profile": {
+  "n_rows": 724,
+  "n_cols": 12,
+  "n_numeric": 8,
+  "n_object": 4,
+  "na_rate": 0.0071,
+  "dup_rows": 0,
+  "top_skew": [
+   5.44,
+   1.66,
+   1.38
+  ],
+  "mean_abs_corr": 0.037,
+  "target_balance": {
+   "Down": 0.529,
+   "Up": 0.471
+  }
+ },
+ "selftest": {
+  "solution_score": 100.0,
+  "total": 100.0,
+  "question_score": 0.0,
+  "solution_failed": []
+ },
+ "difficulty": {
+  "index": 15,
+  "target": 2.014,
+  "band": "초급",
+  "score": 2.58,
+  "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
+  "slot_ratings": {
+   "1": 1,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 2,
+   "7": 3,
+   "8": 2,
+   "9": 3,
+   "10": 4,
+   "11": 3,
+   "12": 2,
+   "13": 3,
+   "14": 3
+  },
+  "slot_targets": {
+   "1": 1.92,
+   "2": 2.2,
+   "3": 2.15,
+   "4": 1.93,
+   "5": 2.09,
+   "6": 1.93,
+   "7": 2.12,
+   "8": 2.41,
+   "9": 2.44,
+   "10": 2.24,
+   "11": 2.28,
+   "12": 2.11,
+   "13": 2.15,
+   "14": 2.14
+  },
+  "knobs": {
+   "extra_quirks": 1,
+   "ctor_refit": false,
+   "dl_extras": 1,
+   "ml_cv": [
+    3
+   ],
+   "ml_variants": [
+    "A"
+   ]
+  },
+  "generated_index": 28,
+  "generated_target": 2.213,
+  "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ }
+}
