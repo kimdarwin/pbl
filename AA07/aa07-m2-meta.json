@@ -170,5 +170,218 @@
   "generated_index": 37,
   "generated_target": 2.351,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "청아도로의 데이터로 교통사고의 인명피해 여부를 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델을 학습하고 GridSearchCV 로 하이퍼파라미터를 탐색할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     3,
+     4
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "quantile",
+    "drop",
+    "reset_index",
+    "dropna",
+    "sum",
+    "isnull",
+    "copy",
+    "get_dummies",
+    "DataFrame",
+    "sort_values",
+    "columns",
+    "shape"
+   ],
+   "NumPy": [
+    "argmin"
+   ],
+   "seaborn": [
+    "boxplot",
+    "violinplot",
+    "barplot"
+   ],
+   "matplotlib": [
+    "import matplotlib.pyplot as plt",
+    "subplots",
+    "show"
+   ],
+   "scikit-learn": [
+    "LabelEncoder",
+    "fit_transform",
+    "train_test_split",
+    "MinMaxScaler",
+    "transform",
+    "DecisionTreeClassifier",
+    "GridSearchCV",
+    "fit",
+    "RandomForestClassifier",
+    "feature_importances_",
+    "best_estimator_",
+    "predict",
+    "f1_score"
+   ],
+   "TensorFlow(Keras)": [
+    "Sequential",
+    "EarlyStopping",
+    "compile",
+    "fit",
+    "Dense",
+    "Dropout",
+    "history"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.69,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 3,
+    "8": 2,
+    "9": 3,
+    "10": 4,
+    "11": 3,
+    "12": 3,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 116,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "traffic",
+   "title": "교통사고 심각도 분석",
+   "industry": "교통·물류",
+   "company": "청아도로",
+   "task": "교통사고의 인명피해 여부를 예측",
+   "target": "인명피해 여부"
+  }
  }
 }
