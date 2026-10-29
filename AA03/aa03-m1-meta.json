@@ -1,70 +1,76 @@
 {
  "schema": "aice-asso-meta/2",
- "model_seed": 7,
- "tf_seed": 100,
- "exam_id": "AICE_Asso_011_초급_분류_통신요금제해지방어",
- "seed": 91003,
- "company": "웰니스텔레콤",
- "domain": "telecom",
- "domain_title": "통신 요금제 해지 방어",
+ "model_seed": 1,
+ "tf_seed": 7,
+ "exam_id": "AICE_Asso_011_초급_분류_공공자전거수요예측",
+ "seed": 95022,
+ "company": "나래라이드",
+ "domain": "bikeshare",
+ "domain_title": "공공자전거 수요 예측",
  "track": "clf2",
  "label_style": "int",
  "name_style": "camel",
  "var_style": "C",
- "target": "churn",
- "n_rows": 742,
- "n_cols": 15,
+ "target": "shortage",
+ "n_rows": 1752,
+ "n_cols": 16,
  "columns": [
+  "shortage",
   "recordId",
-  "monthlyCharge",
-  "dataGb",
-  "nComplaints",
-  "tenureMonths",
-  "roamingCost",
-  "overdueCnt",
-  "appUsageH",
-  "deviceAgeM",
-  "discountAmt",
-  "plan",
-  "contract",
-  "payMethod",
-  "region",
-  "churn"
+  "tempC",
+  "humidity",
+  "windMs",
+  "rainfallMm",
+  "hour",
+  "dustPm10",
+  "visibilityM",
+  "stationPop",
+  "prevHourRent",
+  "season",
+  "holiday",
+  "district",
+  "weather",
+  "gradeTier"
  ],
  "flags": [
-  "na_cat"
+  "na_cat",
+  "ordinal"
  ],
  "data_files": [
   "data.csv"
  ],
  "data_file_format": "fmt_csv",
  "picks": {
-  "1": "IMP.alias.pandas",
+  "1": "IMP.multi_alias",
   "2": "LOAD.read_csv_info",
-  "3": "EDA.nunique_value",
-  "4": "VIZ.boxplot",
+  "3": "EDA.dtypes_value",
+  "4": "VIZ.jointplot",
   "5": "PREP.outlier_iqr_drop",
   "6": "PREP.na_dropna_fill",
-  "7": "PREP.encode_dummies",
+  "7": "PREP.encode_map_dict",
   "8": "SPLIT.holdout",
-  "9": "SCALE.minmax",
-  "10": "ML.gs_dt_rf",
+  "9": "SCALE.standard",
+  "10": "ML.fit_rf_dt",
   "11": "FI.rf_barplot",
-  "12": "EVAL.clf.accuracy",
+  "12": "EVAL.model_score",
   "13": "DL.design_fill",
-  "14": "DL.evaluate"
+  "14": "DLV.plot_fill"
  },
  "namespace_ids": [
-  "DATA.domain.telecom",
+  "DATA.domain.bikeshare",
   "TRACK.clf2",
   "STYLE.name.camel",
   "STYLE.var.C",
   "DATA.fmt.csv",
-  "PARAM.seed.model.7",
-  "PARAM.seed.tf.100",
+  "PARAM.seed.model.1",
+  "PARAM.seed.tf.7",
   "DATA.label.int",
   "DATA.quirk.na_cat",
-  "IMP.alias.pandas",
+  "DATA.quirk.ordinal",
+  "IMP.multi_alias",
+  "IMP.alias.matplotlib",
+  "IMP.alias.numpy",
+  "ANS.token.plt",
   "ANS.blank",
   "ANS.blank.synth",
   "V6.linked",
@@ -72,45 +78,54 @@
   "LOAD.read_csv_info",
   "LOAD.value.rows",
   "ANS.value",
-  "EDA.nunique_value",
-  "VIZ.boxplot",
+  "EDA.dtypes_value",
+  "ANS.token.value_counts",
+  "VIZ.jointplot",
+  "ANS.token.jointplot",
   "PREP.outlier_iqr_drop",
   "PREP.outlier_k.3_0",
+  "ANS.token.drop",
   "PREP.na_dropna_fill",
-  "PREP.encode_dummies",
+  "ANS.token.isnull",
+  "PREP.encode_map_dict",
   "SPLIT.holdout",
-  "SCALE.minmax",
-  "ML.gs_dt_rf",
-  "ML.scoring.f1_macro",
-  "ML.model.DecisionTreeClassifier",
+  "ANS.token.train_test_split",
+  "SCALE.standard",
+  "ML.fit_rf_dt",
+  "ML.hp.rf.n_estimators.200",
+  "ML.hp.rf.max_depth.10",
+  "ML.hp.dt.max_depth.6",
+  "ML.hp.dt.min_samples_leaf.2",
   "ML.model.RandomForestClassifier",
-  "ML.q.max_candidate",
+  "ML.model.DecisionTreeClassifier",
+  "ML.q.train_score_a",
   "FI.rf_barplot",
-  "EVAL.clf.accuracy",
+  "EVAL.model_score",
   "DL.design_fill",
   "DL.act.relu",
-  "DL.opt.rmsprop",
+  "DL.opt.adam",
   "DL.units.C",
-  "DL.opt.model_checkpoint",
-  "DL.evaluate"
+  "ANS.token.Dropout",
+  "DLV.plot_fill",
+  "ANS.token.history"
  ],
  "attempts": 1,
  "profile": {
-  "n_rows": 742,
-  "n_cols": 15,
+  "n_rows": 1752,
+  "n_cols": 16,
   "n_numeric": 10,
-  "n_object": 5,
-  "na_rate": 0.005,
+  "n_object": 6,
+  "na_rate": 0.0096,
   "dup_rows": 0,
   "top_skew": [
-   2.61,
-   2.14,
-   2.07
+   3.67,
+   3.01,
+   2.24
   ],
-  "mean_abs_corr": 0.055,
+  "mean_abs_corr": 0.047,
   "target_balance": {
-   "0": 0.683,
-   "1": 0.317
+   "0": 0.647,
+   "1": 0.353
   }
  },
  "selftest": {
@@ -123,44 +138,44 @@
   "index": 11,
   "target": 1.953,
   "band": "초급",
-  "score": 2.53,
+  "score": 2.34,
   "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
   "slot_ratings": {
    "1": 1,
    "2": 1,
    "3": 1,
-   "4": 2,
+   "4": 3,
    "5": 2,
    "6": 2,
    "7": 3,
    "8": 2,
    "9": 3,
-   "10": 4,
+   "10": 2,
    "11": 3,
    "12": 2,
    "13": 3,
    "14": 3
   },
   "slot_targets": {
-   "1": 2.04,
-   "2": 1.67,
-   "3": 1.55,
-   "4": 2.1,
-   "5": 2.05,
-   "6": 1.98,
-   "7": 1.89,
-   "8": 1.83,
-   "9": 2.06,
-   "10": 1.61,
-   "11": 1.49,
-   "12": 2.1,
-   "13": 1.56,
-   "14": 1.7
+   "1": 2.14,
+   "2": 2.14,
+   "3": 1.92,
+   "4": 2.43,
+   "5": 1.9,
+   "6": 2.37,
+   "7": 2.34,
+   "8": 2.02,
+   "9": 2.21,
+   "10": 1.91,
+   "11": 2.39,
+   "12": 1.98,
+   "13": 1.97,
+   "14": 2.03
   },
   "knobs": {
    "extra_quirks": 1,
    "ctor_refit": false,
-   "dl_extras": 1,
+   "dl_extras": 0,
    "ml_cv": [
     3
    ],
@@ -168,8 +183,231 @@
     "A"
    ]
   },
-  "generated_index": 3,
-  "generated_target": 1.831,
+  "generated_index": 22,
+  "generated_target": 2.121,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "나래라이드의 데이터로 대여소의 자전거 부족 여부를 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "집계·통계량으로 데이터의 특징을 탐색할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델에 하이퍼파라미터를 지정해 학습하고 결과를 확인할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA3",
+    "area": "데이터 분석",
+    "name": "탐색적 데이터 분석",
+    "questions": [
+     3
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     4
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "value_counts",
+    "dtypes",
+    "quantile",
+    "drop",
+    "reset_index",
+    "dropna",
+    "sum",
+    "isnull",
+    "copy",
+    "map",
+    "get_dummies",
+    "DataFrame",
+    "sort_values",
+    "columns",
+    "shape"
+   ],
+   "NumPy": [
+    "import numpy as np"
+   ],
+   "seaborn": [
+    "jointplot",
+    "barplot"
+   ],
+   "matplotlib": [
+    "import matplotlib.pyplot as plt",
+    "show",
+    "plot",
+    "title",
+    "xlabel",
+    "ylabel",
+    "legend"
+   ],
+   "scikit-learn": [
+    "train_test_split",
+    "StandardScaler",
+    "fit_transform",
+    "transform",
+    "RandomForestClassifier",
+    "fit",
+    "DecisionTreeClassifier",
+    "feature_importances_",
+    "score"
+   ],
+   "TensorFlow(Keras)": [
+    "Sequential",
+    "EarlyStopping",
+    "compile",
+    "fit",
+    "Dense",
+    "Dropout",
+    "history"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.34,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 1,
+    "4": 3,
+    "5": 2,
+    "6": 2,
+    "7": 3,
+    "8": 2,
+    "9": 3,
+    "10": 2,
+    "11": 3,
+    "12": 2,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 109,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "bikeshare",
+   "title": "공공자전거 수요 예측",
+   "industry": "교통·물류",
+   "company": "나래라이드",
+   "task": "대여소의 자전거 부족 여부를 예측",
+   "target": "자전거 부족 여부"
+  }
  }
 }

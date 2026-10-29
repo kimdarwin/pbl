@@ -1,74 +1,68 @@
 {
  "schema": "aice-asso-meta/2",
- "model_seed": 42,
- "tf_seed": 7,
- "exam_id": "AICE_Asso_014_초급_회귀_항공예약관리",
- "seed": 91032,
- "company": "은은윙",
- "domain": "airline",
- "domain_title": "항공 예약 관리",
+ "model_seed": 7,
+ "tf_seed": 42,
+ "exam_id": "AICE_Asso_014_초급_회귀_물류배송지연예측",
+ "seed": 95015,
+ "company": "푸른익스프레스",
+ "domain": "logistics",
+ "domain_title": "물류 배송 지연 예측",
  "track": "reg",
  "label_style": "string",
- "name_style": "camel",
- "var_style": "C",
- "target": "ancillaryKrw",
- "n_rows": 1344,
- "n_cols": 16,
+ "name_style": "title",
+ "var_style": "A",
+ "target": "Delivery_Hours",
+ "n_rows": 1856,
+ "n_cols": 13,
  "columns": [
-  "ancillaryKrw",
-  "serialNo",
-  "leadDays",
-  "fareKrw",
-  "nPax",
-  "bagKg",
-  "pastFlights",
-  "changeCnt",
-  "checkinH",
-  "miles",
-  "seatLoad",
-  "delayPrevMin",
-  "cabin",
-  "channel",
-  "member",
-  "riskLevel"
+  "Delivery_Hours",
+  "Sample_Id",
+  "Distance_Km",
+  "Weight_Kg",
+  "N_Stops",
+  "Traffic_Idx",
+  "Loading_Min",
+  "Driver_Exp_Y",
+  "Vehicle_Age",
+  "Pkg_Count",
+  "Vehicle",
+  "Weather",
+  "Route_Type"
  ],
  "flags": [
-  "ordinal",
-  "outlier_both"
+  "na_cat"
  ],
  "data_files": [
   "data.csv"
  ],
  "data_file_format": "fmt_csv",
  "picks": {
-  "1": "IMP.multi_alias",
+  "1": "IMP.alias.pandas",
   "2": "LOAD.read_csv",
   "3": "VIZ.subplots_fill",
   "4": "VIZ.scatter_hue",
-  "5": "PREP.outlier_iqr_drop",
-  "6": "PREP.na_fillna_mean",
-  "7": "PREP.encode_map_dict",
-  "8": "SPLIT.stratify_ratio",
+  "5": "PREP.outlier_iqr_filter",
+  "6": "PREP.na_dropna_fill",
+  "7": "PREP.encode_dummies",
+  "8": "SPLIT.size_value",
   "9": "SCALE.robust",
-  "10": "ML.plain_dt_rf",
+  "10": "ML.fit_knn_dt",
   "11": "FI.top1_name",
   "12": "EVAL.reg.mae",
   "13": "DL.design_fill",
   "14": "DLV.plot_fill"
  },
  "namespace_ids": [
-  "DATA.domain.airline",
+  "DATA.domain.logistics",
   "TRACK.reg",
-  "STYLE.name.camel",
-  "STYLE.var.C",
+  "STYLE.name.title",
+  "STYLE.var.A",
   "DATA.fmt.csv",
-  "PARAM.seed.model.42",
-  "PARAM.seed.tf.7",
-  "DATA.quirk.ordinal",
-  "DATA.quirk.outlier_both",
-  "IMP.multi_alias",
-  "IMP.alias.numpy",
-  "IMP.alias.seaborn",
+  "PARAM.seed.model.7",
+  "PARAM.seed.tf.42",
+  "DATA.quirk.na_cat",
+  "IMP.alias.pandas",
+  "ANS.token.pandas",
   "ANS.blank",
   "ANS.blank.synth",
   "V6.linked",
@@ -78,45 +72,55 @@
   "ANS.value",
   "VIZ.subplots_fill",
   "VIZ.subplots.counthist",
+  "ANS.token.figsize",
   "VIZ.scatter_hue",
-  "PREP.outlier_iqr_drop",
+  "ANS.token.scatterplot",
+  "PREP.outlier_iqr_filter",
   "PREP.outlier_k.3_0",
-  "PREP.na_fillna_mean",
-  "PREP.encode_map_dict",
-  "SPLIT.stratify_ratio",
+  "ANS.token.quantile",
+  "PREP.na_dropna_fill",
+  "ANS.token.dropna",
+  "PREP.encode_dummies",
+  "SPLIT.size_value",
+  "ANS.token.random_state",
   "SCALE.robust",
-  "ML.plain_dt_rf",
-  "ML.scoring.neg_mean_absolute_error",
+  "ML.fit_knn_dt",
+  "ML.hp.knn.n_neighbors.15",
+  "ML.hp.knn.weights.uniform",
+  "ML.hp.dt.max_depth.8",
+  "ML.hp.dt.min_samples_leaf.5",
+  "ML.model.KNeighborsRegressor",
   "ML.model.DecisionTreeRegressor",
-  "ML.model.RandomForestRegressor",
-  "ML.q.total_fits",
+  "ML.q.train_score_a",
   "FI.top1_name",
   "EVAL.reg.mae",
   "DL.design_fill",
-  "DL.act.selu",
+  "DL.act.elu",
   "DL.opt.rmsprop",
-  "DL.units.A",
+  "DL.units.C",
+  "DL.opt.obj_lr",
   "DL.fit.epochs_extra",
-  "DL.opt.model_checkpoint",
-  "DLV.plot_fill"
+  "ANS.token.EarlyStopping",
+  "DLV.plot_fill",
+  "ANS.token.legend"
  ],
  "attempts": 1,
  "profile": {
-  "n_rows": 1344,
-  "n_cols": 16,
-  "n_numeric": 12,
+  "n_rows": 1856,
+  "n_cols": 13,
+  "n_numeric": 9,
   "n_object": 4,
-  "na_rate": 0.0053,
+  "na_rate": 0.0083,
   "dup_rows": 0,
   "top_skew": [
-   2.36,
-   1.87,
-   1.52
+   2.96,
+   2.08,
+   1.91
   ],
-  "mean_abs_corr": 0.049,
+  "mean_abs_corr": 0.084,
   "target_balance": {
-   "mean": 45882.135,
-   "std": 19417.533
+   "mean": 10.523,
+   "std": 5.238
   }
  },
  "selftest": {
@@ -129,39 +133,39 @@
   "index": 14,
   "target": 1.999,
   "band": "초급",
-  "score": 2.55,
+  "score": 2.39,
   "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
   "slot_ratings": {
    "1": 1,
    "2": 1,
    "3": 3,
    "4": 2,
-   "5": 2,
-   "6": 3,
+   "5": 3,
+   "6": 2,
    "7": 3,
-   "8": 3,
+   "8": 2,
    "9": 3,
-   "10": 3,
+   "10": 2,
    "11": 2,
    "12": 2,
    "13": 3,
    "14": 3
   },
   "slot_targets": {
-   "1": 2.5,
-   "2": 2.28,
-   "3": 2.58,
-   "4": 2.16,
-   "5": 1.94,
-   "6": 2.42,
-   "7": 2.36,
-   "8": 2.62,
-   "9": 2.27,
-   "10": 1.94,
-   "11": 1.94,
-   "12": 2.31,
-   "13": 2.49,
-   "14": 2.28
+   "1": 1.8,
+   "2": 1.76,
+   "3": 2.33,
+   "4": 2.14,
+   "5": 2.34,
+   "6": 2.04,
+   "7": 1.94,
+   "8": 1.71,
+   "9": 2.1,
+   "10": 1.96,
+   "11": 2.09,
+   "12": 2.06,
+   "13": 1.68,
+   "14": 2.31
   },
   "knobs": {
    "extra_quirks": 1,
@@ -174,8 +178,220 @@
     "A"
    ]
   },
-  "generated_index": 32,
-  "generated_target": 2.274,
+  "generated_index": 15,
+  "generated_target": 2.014,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "푸른익스프레스의 데이터로 총 배송 소요시간(시간)을 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델에 하이퍼파라미터를 지정해 학습하고 결과를 확인할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     3,
+     4
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "quantile",
+    "reset_index",
+    "drop",
+    "dropna",
+    "sum",
+    "isnull",
+    "get_dummies",
+    "info",
+    "Series",
+    "idxmax",
+    "columns",
+    "shape"
+   ],
+   "seaborn": [
+    "countplot",
+    "histplot",
+    "scatterplot"
+   ],
+   "matplotlib": [
+    "subplots",
+    "show",
+    "plot",
+    "title",
+    "xlabel",
+    "ylabel",
+    "legend"
+   ],
+   "scikit-learn": [
+    "train_test_split",
+    "RobustScaler",
+    "fit_transform",
+    "transform",
+    "KNeighborsRegressor",
+    "fit",
+    "DecisionTreeRegressor",
+    "feature_importances_",
+    "predict",
+    "mean_absolute_error"
+   ],
+   "TensorFlow(Keras)": [
+    "Sequential",
+    "EarlyStopping",
+    "compile",
+    "fit",
+    "Dense",
+    "Dropout",
+    "RMSprop",
+    "history"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.39,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 2,
+    "5": 3,
+    "6": 2,
+    "7": 3,
+    "8": 2,
+    "9": 3,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 110,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "logistics",
+   "title": "물류 배송 지연 예측",
+   "industry": "교통·물류",
+   "company": "푸른익스프레스",
+   "task": "총 배송 소요시간(시간)을 예측",
+   "target": "총 배송 소요시간(시간)"
+  }
  }
 }

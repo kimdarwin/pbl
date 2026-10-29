@@ -1,38 +1,38 @@
 {
  "schema": "aice-asso-meta/2",
- "model_seed": 42,
- "tf_seed": 100,
- "exam_id": "AICE_Asso_020_초급_분류_병원재입원관리",
- "seed": 91022,
- "company": "그린대학",
- "domain": "hospital",
- "domain_title": "병원 재입원 관리",
+ "model_seed": 0,
+ "tf_seed": 42,
+ "exam_id": "AICE_Asso_020_초급_분류_스마트팜생육관리",
+ "seed": 95005,
+ "company": "비전새싹",
+ "domain": "smartfarm",
+ "domain_title": "스마트팜 생육 관리",
  "track": "clf2",
- "label_style": "int",
- "name_style": "camel",
- "var_style": "A",
- "target": "readmit30d",
- "n_rows": 2749,
- "n_cols": 14,
+ "label_style": "string",
+ "name_style": "upper",
+ "var_style": "C",
+ "target": "DISEASE_FLAG",
+ "n_rows": 1442,
+ "n_cols": 15,
  "columns": [
-  "uid",
-  "age",
-  "nMeds",
-  "creatinine",
-  "systolicBp",
-  "glucose",
-  "nVisitsPrev",
-  "hemoglobin",
-  "albumin",
-  "insurance",
-  "admitRoute",
-  "sex",
-  "priority",
-  "readmit30d"
+  "RECORD_ID",
+  "AIR_TEMP",
+  "HUMIDITY",
+  "CO2_PPM",
+  "SOIL_MOIST",
+  "LIGHT_LUX",
+  "SOIL_PH",
+  "EC_DS",
+  "NUTRIENT_N",
+  "WATER_L",
+  "LEAF_TEMP",
+  "CROP",
+  "HOUSE_ID",
+  "SEASON",
+  "DISEASE_FLAG"
  ],
  "flags": [
-  "mar",
-  "ordinal"
+  "dupes"
  ],
  "data_files": [
   "data.csv"
@@ -40,77 +40,89 @@
  "data_file_format": "fmt_csv",
  "picks": {
   "1": "IMP.alias.pandas",
-  "2": "LOAD.read_csv",
-  "3": "EDA.minmax_value",
-  "4": "VIZ.histplot_hue",
+  "2": "LOAD.read_csv_info",
+  "3": "VIZ.subplots_fill",
+  "4": "EDA.iloc_value",
   "5": "PREP.outlier_iqr_drop",
-  "6": "PREP.na_fillna_mean",
-  "7": "PREP.encode_map_dict",
+  "6": "PREP.na_dropna_fill",
+  "7": "PREP.dedup_drop",
   "8": "SPLIT.holdout",
-  "9": "SCALE.robust",
-  "10": "ML.gs_dt_rf",
+  "9": "SCALE.minmax",
+  "10": "ML.fit_rf_dt",
   "11": "FI.rf_barplot",
   "12": "EVAL.clf.accuracy",
   "13": "DL.design_fill",
-  "14": "DLV.plot_fill"
+  "14": "DL.evaluate"
  },
  "namespace_ids": [
-  "DATA.domain.hospital",
+  "DATA.domain.smartfarm",
   "TRACK.clf2",
-  "STYLE.name.camel",
-  "STYLE.var.A",
+  "STYLE.name.upper",
+  "STYLE.var.C",
   "DATA.fmt.csv",
-  "PARAM.seed.model.42",
-  "PARAM.seed.tf.100",
-  "DATA.label.int",
-  "DATA.quirk.mar",
-  "DATA.quirk.ordinal",
+  "PARAM.seed.model.0",
+  "PARAM.seed.tf.42",
+  "DATA.label.string",
+  "DATA.quirk.dupes",
   "IMP.alias.pandas",
+  "ANS.token.pandas",
   "ANS.blank",
   "ANS.blank.synth",
   "V6.linked",
   "V6.hint_fullcode",
-  "LOAD.read_csv",
-  "LOAD.value.obj",
+  "LOAD.read_csv_info",
+  "LOAD.value.cols",
   "ANS.value",
-  "EDA.minmax_value",
-  "VIZ.histplot_hue",
+  "VIZ.subplots_fill",
+  "VIZ.subplots.scatterkde",
+  "ANS.token.scatterplot",
+  "EDA.iloc_value",
   "PREP.outlier_iqr_drop",
-  "PREP.outlier_k.3_0",
-  "PREP.na_fillna_mean",
-  "PREP.encode_map_dict",
+  "PREP.outlier_k.1_5",
+  "ANS.token.index",
+  "PREP.na_dropna_fill",
+  "ANS.token.isnull",
+  "PREP.dedup_drop",
   "SPLIT.holdout",
-  "SCALE.robust",
-  "ML.gs_dt_rf",
-  "ML.scoring.accuracy",
-  "ML.model.DecisionTreeClassifier",
+  "ANS.token.test_size",
+  "SCALE.minmax",
+  "ML.fit_rf_dt",
+  "ML.hp.rf.n_estimators.100",
+  "ML.hp.rf.max_depth.4",
+  "ML.hp.dt.max_depth.4",
+  "ML.hp.dt.min_samples_leaf.1",
   "ML.model.RandomForestClassifier",
-  "ML.q.max_candidate",
+  "ML.model.DecisionTreeClassifier",
+  "ML.q.train_score_a",
   "FI.rf_barplot",
   "EVAL.clf.accuracy",
   "DL.design_fill",
-  "DL.act.elu",
-  "DL.opt.rmsprop",
+  "DL.act.selu",
+  "DL.opt.nadam",
   "DL.units.C",
-  "DLV.plot_fill"
+  "DL.opt.obj_lr",
+  "DL.fit.validation_split",
+  "ANS.token.validation_split",
+  "DL.evaluate",
+  "ANS.token.verbose"
  ],
- "attempts": 2,
+ "attempts": 1,
  "profile": {
-  "n_rows": 2749,
-  "n_cols": 14,
-  "n_numeric": 10,
+  "n_rows": 1442,
+  "n_cols": 15,
+  "n_numeric": 11,
   "n_object": 4,
-  "na_rate": 0.0061,
-  "dup_rows": 0,
+  "na_rate": 0.0047,
+  "dup_rows": 13,
   "top_skew": [
-   2.78,
-   1.35,
-   0.97
+   2.96,
+   1.08,
+   0.11
   ],
-  "mean_abs_corr": 0.053,
+  "mean_abs_corr": 0.046,
   "target_balance": {
-   "0": 0.706,
-   "1": 0.294
+   "Healthy": 0.626,
+   "Disease": 0.374
   }
  },
  "selftest": {
@@ -123,44 +135,44 @@
   "index": 20,
   "target": 2.091,
   "band": "초급",
-  "score": 2.6,
+  "score": 2.41,
   "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
   "slot_ratings": {
    "1": 1,
    "2": 1,
-   "3": 1,
-   "4": 3,
+   "3": 3,
+   "4": 2,
    "5": 2,
-   "6": 3,
-   "7": 3,
+   "6": 2,
+   "7": 2,
    "8": 2,
    "9": 3,
-   "10": 4,
+   "10": 2,
    "11": 3,
    "12": 2,
    "13": 3,
    "14": 3
   },
   "slot_targets": {
-   "1": 2.43,
-   "2": 2.21,
-   "3": 2.07,
-   "4": 2.23,
-   "5": 2.03,
-   "6": 2.45,
-   "7": 1.77,
-   "8": 2.41,
-   "9": 2.38,
-   "10": 2.18,
-   "11": 2.12,
-   "12": 1.8,
-   "13": 2.08,
-   "14": 1.98
+   "1": 1.81,
+   "2": 1.96,
+   "3": 2.15,
+   "4": 1.73,
+   "5": 1.83,
+   "6": 2.12,
+   "7": 1.63,
+   "8": 2.04,
+   "9": 1.63,
+   "10": 1.96,
+   "11": 2.09,
+   "12": 1.98,
+   "13": 2.03,
+   "14": 2.11
   },
   "knobs": {
    "extra_quirks": 1,
    "ctor_refit": false,
-   "dl_extras": 0,
+   "dl_extras": 2,
    "ml_cv": [
     3
    ],
@@ -168,8 +180,227 @@
     "A"
    ]
   },
-  "generated_index": 22,
-  "generated_target": 2.121,
+  "generated_index": 5,
+  "generated_target": 1.861,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "비전새싹의 데이터로 병해 발생 여부를 사전에 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "집계·통계량으로 데이터의 특징을 탐색할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델에 하이퍼파라미터를 지정해 학습하고 결과를 확인할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA3",
+    "area": "데이터 분석",
+    "name": "탐색적 데이터 분석",
+    "questions": [
+     4
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     3
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "iloc",
+    "quantile",
+    "drop",
+    "reset_index",
+    "dropna",
+    "sum",
+    "isnull",
+    "duplicated",
+    "drop_duplicates",
+    "get_dummies",
+    "info",
+    "DataFrame",
+    "sort_values",
+    "columns",
+    "shape"
+   ],
+   "seaborn": [
+    "scatterplot",
+    "kdeplot",
+    "barplot"
+   ],
+   "matplotlib": [
+    "subplots",
+    "show"
+   ],
+   "scikit-learn": [
+    "train_test_split",
+    "MinMaxScaler",
+    "fit_transform",
+    "transform",
+    "RandomForestClassifier",
+    "fit",
+    "DecisionTreeClassifier",
+    "feature_importances_",
+    "predict",
+    "accuracy_score",
+    "LabelEncoder"
+   ],
+   "TensorFlow(Keras)": [
+    "Sequential",
+    "EarlyStopping",
+    "compile",
+    "fit",
+    "Dense",
+    "Dropout",
+    "Nadam",
+    "evaluate"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.41,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 3,
+    "10": 2,
+    "11": 3,
+    "12": 2,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 110,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "smartfarm",
+   "title": "스마트팜 생육 관리",
+   "industry": "농업·식품",
+   "company": "비전새싹",
+   "task": "병해 발생 여부를 사전에 예측",
+   "target": "병해 발생 여부"
+  }
  }
 }

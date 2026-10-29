@@ -1,68 +1,71 @@
 {
  "schema": "aice-asso-meta/2",
  "model_seed": 42,
- "tf_seed": 42,
- "exam_id": "AICE_Asso_023_초급_분류_온라인강의수료예측",
- "seed": 91019,
- "company": "그린아카데미",
- "domain": "edu",
- "domain_title": "온라인 강의 수료 예측",
- "track": "clf2",
+ "tf_seed": 1,
+ "exam_id": "AICE_Asso_023_초급_다중분류_물류배송지연예측",
+ "seed": 95031,
+ "company": "나래택배",
+ "domain": "logistics",
+ "domain_title": "물류 배송 지연 예측",
+ "track": "clf3",
  "label_style": "int",
- "name_style": "upper",
- "var_style": "C",
- "target": "COMPLETED",
- "n_rows": 3025,
- "n_cols": 13,
+ "name_style": "camel",
+ "var_style": "A",
+ "target": "delayLevel",
+ "n_rows": 2052,
+ "n_cols": 15,
  "columns": [
-  "SAMPLE_ID",
-  "WATCH_MIN",
-  "QUIZ_AVG",
-  "ASSIGNMENT_DONE",
-  "FORUM_POSTS",
-  "DAYS_SINCE_LAST",
-  "STUDY_STREAK",
-  "MID_EXAM",
-  "CHAT_MSGS",
-  "LEVEL",
-  "ENROLL_TYPE",
-  "DEVICE",
-  "COMPLETED"
+  "regNo",
+  "distanceKm",
+  "weightKg",
+  "nStops",
+  "trafficIdx",
+  "tempC",
+  "loadingMin",
+  "driverExpY",
+  "vehicleAge",
+  "fuelPrice",
+  "carrier",
+  "vehicle",
+  "weather",
+  "routeType",
+  "delayLevel"
  ],
  "flags": [
-  "outlier_both"
+  "dupes"
  ],
  "data_files": [
   "data.csv"
  ],
  "data_file_format": "fmt_csv",
  "picks": {
-  "1": "IMP.alias.pandas",
+  "1": "IMP.alias.matplotlib",
   "2": "LOAD.read_csv_info",
-  "3": "EDA.corr_value",
-  "4": "VIZ.boxplot",
+  "3": "EDA.select_dtypes_value",
+  "4": "VIZ.histplot_hue",
   "5": "PREP.outlier_iqr_drop",
-  "6": "PREP.na_dropna_subset",
-  "7": "PREP.encode_dummies",
+  "6": "PREP.na_dropna_fill",
+  "7": "PREP.rename_cols",
   "8": "SPLIT.size_value",
-  "9": "SCALE.standard",
-  "10": "ML.gs_knn_rf",
-  "11": "FI.top1_name",
-  "12": "EVAL.clf.f1",
+  "9": "SCALE.minmax",
+  "10": "ML.fit_lr_rf",
+  "11": "FI.topn_sum",
+  "12": "EVAL.clf.accuracy",
   "13": "DL.design_fill",
-  "14": "DL.evaluate"
+  "14": "DLV.plot_fill"
  },
  "namespace_ids": [
-  "DATA.domain.edu",
-  "TRACK.clf2",
-  "STYLE.name.upper",
-  "STYLE.var.C",
+  "DATA.domain.logistics",
+  "TRACK.clf3",
+  "STYLE.name.camel",
+  "STYLE.var.A",
   "DATA.fmt.csv",
   "PARAM.seed.model.42",
-  "PARAM.seed.tf.42",
+  "PARAM.seed.tf.1",
   "DATA.label.int",
-  "DATA.quirk.outlier_both",
-  "IMP.alias.pandas",
+  "DATA.quirk.dupes",
+  "IMP.alias.matplotlib",
+  "ANS.token.matplotlib.pyplot",
   "ANS.blank",
   "ANS.blank.synth",
   "V6.linked",
@@ -70,45 +73,58 @@
   "LOAD.read_csv_info",
   "LOAD.value.cols",
   "ANS.value",
-  "EDA.corr_value",
-  "VIZ.boxplot",
+  "EDA.select_dtypes_value",
+  "ANS.token.select_dtypes",
+  "VIZ.histplot_hue",
+  "ANS.token.multiple",
   "PREP.outlier_iqr_drop",
   "PREP.outlier_k.3_0",
-  "PREP.na_dropna_subset",
-  "PREP.encode_dummies",
+  "ANS.token.drop",
+  "PREP.na_dropna_fill",
+  "ANS.token.isnull",
+  "PREP.rename_cols",
   "SPLIT.size_value",
-  "SCALE.standard",
-  "ML.gs_knn_rf",
-  "ML.scoring.precision_macro",
-  "ML.model.KNeighborsClassifier",
+  "ANS.token.train_test_split",
+  "SCALE.minmax",
+  "ML.fit_lr_rf",
+  "ML.hp.lr.C.1.0",
+  "ML.hp.rf.n_estimators.50",
+  "ML.hp.rf.max_depth.8",
+  "ML.model.LogisticRegression",
   "ML.model.RandomForestClassifier",
-  "ML.q.max_candidate",
-  "FI.top1_name",
-  "EVAL.clf.f1",
+  "ML.q.train_score_b",
+  "FI.topn_sum",
+  "EVAL.clf.accuracy",
   "DL.design_fill",
-  "DL.act.tanh",
-  "DL.opt.adam",
-  "DL.units.C",
+  "DL.act.relu",
+  "DL.opt.nadam",
+  "DL.units.A",
+  "DL.opt.obj_lr",
+  "DL.fit.epochs_extra",
+  "DL.opt.batchnorm",
   "DL.opt.model_checkpoint",
-  "DL.evaluate"
+  "ANS.token.categorical_crossentropy",
+  "DLV.plot_fill",
+  "ANS.token.legend"
  ],
- "attempts": 1,
+ "attempts": 2,
  "profile": {
-  "n_rows": 3025,
-  "n_cols": 13,
+  "n_rows": 2052,
+  "n_cols": 15,
   "n_numeric": 10,
-  "n_object": 3,
-  "na_rate": 0.011,
-  "dup_rows": 0,
+  "n_object": 5,
+  "na_rate": 0.009,
+  "dup_rows": 38,
   "top_skew": [
-   1.71,
-   1.47,
-   1.12
+   3.5,
+   3.27,
+   1.49
   ],
-  "mean_abs_corr": 0.052,
+  "mean_abs_corr": 0.06,
   "target_balance": {
-   "0": 0.703,
-   "1": 0.297
+   "2": 0.501,
+   "1": 0.3,
+   "0": 0.199
   }
  },
  "selftest": {
@@ -121,44 +137,44 @@
   "index": 23,
   "target": 2.137,
   "band": "초급",
-  "score": 2.63,
+  "score": 2.45,
   "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
   "slot_ratings": {
    "1": 1,
    "2": 1,
-   "3": 3,
-   "4": 2,
+   "3": 2,
+   "4": 3,
    "5": 2,
    "6": 2,
-   "7": 3,
+   "7": 2,
    "8": 2,
    "9": 3,
-   "10": 4,
-   "11": 2,
-   "12": 3,
+   "10": 2,
+   "11": 3,
+   "12": 2,
    "13": 3,
    "14": 3
   },
   "slot_targets": {
-   "1": 2.36,
-   "2": 1.81,
-   "3": 2.09,
-   "4": 1.76,
-   "5": 2.05,
-   "6": 1.92,
-   "7": 2.1,
-   "8": 1.78,
-   "9": 2.19,
-   "10": 2.02,
-   "11": 1.76,
-   "12": 2.37,
-   "13": 1.94,
-   "14": 1.77
+   "1": 1.98,
+   "2": 2.22,
+   "3": 2.06,
+   "4": 2.33,
+   "5": 2.07,
+   "6": 2.07,
+   "7": 2.19,
+   "8": 2.18,
+   "9": 2.47,
+   "10": 1.93,
+   "11": 2.45,
+   "12": 2.0,
+   "13": 2.11,
+   "14": 2.06
   },
   "knobs": {
    "extra_quirks": 1,
    "ctor_refit": false,
-   "dl_extras": 1,
+   "dl_extras": 3,
    "ml_cv": [
     3
    ],
@@ -166,8 +182,231 @@
     "A"
    ]
   },
-  "generated_index": 19,
-  "generated_target": 2.076,
+  "generated_index": 31,
+  "generated_target": 2.259,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "나래택배의 데이터로 배송 지연 수준을 3단계로 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "집계·통계량으로 데이터의 특징을 탐색할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델에 하이퍼파라미터를 지정해 학습하고 결과를 확인할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA3",
+    "area": "데이터 분석",
+    "name": "탐색적 데이터 분석",
+    "questions": [
+     3
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     4
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "select_dtypes",
+    "columns",
+    "quantile",
+    "drop",
+    "reset_index",
+    "dropna",
+    "sum",
+    "isnull",
+    "rename",
+    "get_dummies",
+    "info",
+    "DataFrame",
+    "sort_values",
+    "shape"
+   ],
+   "seaborn": [
+    "histplot"
+   ],
+   "matplotlib": [
+    "import matplotlib.pyplot as plt",
+    "show",
+    "plot",
+    "title",
+    "xlabel",
+    "ylabel",
+    "legend"
+   ],
+   "scikit-learn": [
+    "train_test_split",
+    "MinMaxScaler",
+    "fit_transform",
+    "transform",
+    "LogisticRegression",
+    "fit",
+    "RandomForestClassifier",
+    "feature_importances_",
+    "predict",
+    "accuracy_score"
+   ],
+   "TensorFlow(Keras)": [
+    "to_categorical",
+    "Sequential",
+    "EarlyStopping",
+    "ModelCheckpoint",
+    "compile",
+    "fit",
+    "Dense",
+    "BatchNormalization",
+    "Dropout",
+    "Nadam",
+    "history"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.45,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 3,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 3,
+    "10": 2,
+    "11": 3,
+    "12": 2,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 108,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "logistics",
+   "title": "물류 배송 지연 예측",
+   "industry": "교통·물류",
+   "company": "나래택배",
+   "task": "배송 지연 수준을 3단계로 예측",
+   "target": "지연 수준"
+  }
  }
 }

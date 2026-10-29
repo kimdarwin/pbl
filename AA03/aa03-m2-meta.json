@@ -1,34 +1,37 @@
 {
  "schema": "aice-asso-meta/2",
- "model_seed": 0,
+ "model_seed": 1,
  "tf_seed": 1,
- "exam_id": "AICE_Asso_012_초급_회귀_주식종목평가",
- "seed": 91018,
- "company": "맑은캐피탈",
- "domain": "stock",
- "domain_title": "주식 종목 평가",
+ "exam_id": "AICE_Asso_012_초급_회귀_자동차보험청구분석",
+ "seed": 95018,
+ "company": "웰니스안심",
+ "domain": "insurance",
+ "domain_title": "자동차보험 청구 분석",
  "track": "reg",
  "label_style": "string",
- "name_style": "title",
- "var_style": "A",
- "target": "Next_Ret",
- "n_rows": 2571,
- "n_cols": 12,
+ "name_style": "camel",
+ "var_style": "C",
+ "target": "repairDays",
+ "n_rows": 1144,
+ "n_cols": 14,
  "columns": [
-  "Uid",
-  "Ret_1m",
-  "Volatility",
-  "Pbr",
-  "Foreign_Ratio",
-  "Debt_Ratio",
-  "Roe",
-  "Analyst_Cnt",
-  "Sector",
-  "Cap_Class",
-  "Theme",
-  "Next_Ret"
+  "repairDays",
+  "rowId",
+  "claimAmount",
+  "policyAge",
+  "nClaimsPrev",
+  "driverAge",
+  "annualKm",
+  "repairEst",
+  "reportDelayD",
+  "witnessCnt",
+  "premiumKrw",
+  "coverage",
+  "channel",
+  "region"
  ],
  "flags": [
+  "composite",
   "mar"
  ],
  "data_files": [
@@ -36,77 +39,90 @@
  ],
  "data_file_format": "fmt_csv",
  "picks": {
-  "1": "IMP.alias.pandas",
+  "1": "IMP.multi_alias",
   "2": "LOAD.read_csv",
-  "3": "EDA.nunique_value",
-  "4": "VIZ.boxplot",
+  "3": "VIZ.subplots_fill",
+  "4": "EDA.tail_value",
   "5": "PREP.outlier_iqr_drop",
   "6": "PREP.na_dropna_fill",
-  "7": "PREP.encode_label",
+  "7": "PREP.cat_replace_dummies",
   "8": "SPLIT.holdout",
-  "9": "SCALE.standard",
-  "10": "ML.lin_rf",
+  "9": "SCALE.blank_fill",
+  "10": "ML.fit_linreg_dt",
   "11": "FI.linreg_coef",
-  "12": "EVAL.reg.r2",
+  "12": "EVAL.reg.mae",
   "13": "DL.design_fill",
   "14": "DLV.plot_fill"
  },
  "namespace_ids": [
-  "DATA.domain.stock",
+  "DATA.domain.insurance",
   "TRACK.reg",
-  "STYLE.name.title",
-  "STYLE.var.A",
+  "STYLE.name.camel",
+  "STYLE.var.C",
   "DATA.fmt.csv",
-  "PARAM.seed.model.0",
+  "PARAM.seed.model.1",
   "PARAM.seed.tf.1",
+  "DATA.quirk.composite",
   "DATA.quirk.mar",
-  "IMP.alias.pandas",
+  "IMP.multi_alias",
+  "IMP.alias.seaborn",
+  "IMP.alias.numpy",
+  "ANS.token.np",
   "ANS.blank",
   "ANS.blank.synth",
   "V6.linked",
   "V6.hint_fullcode",
   "LOAD.read_csv",
-  "LOAD.value.cols",
+  "LOAD.value.obj",
   "ANS.value",
-  "EDA.nunique_value",
-  "VIZ.boxplot",
+  "VIZ.subplots_fill",
+  "VIZ.subplots.scatterkde",
+  "ANS.token.subplots",
+  "EDA.tail_value",
+  "ANS.token.tail",
   "PREP.outlier_iqr_drop",
   "PREP.outlier_k.1_5",
+  "ANS.token.index",
   "PREP.na_dropna_fill",
-  "PREP.encode_label",
+  "ANS.token.isnull",
+  "PREP.cat_replace_dummies",
   "SPLIT.holdout",
-  "SCALE.standard",
-  "ML.lin_rf",
-  "ML.scoring.neg_root_mean_squared_error",
+  "ANS.token.random_state",
+  "SCALE.blank_fill",
+  "ML.fit_linreg_dt",
+  "ML.hp.dt.max_depth.8",
+  "ML.hp.dt.min_samples_leaf.10",
   "ML.model.LinearRegression",
-  "ML.model.RandomForestRegressor",
-  "ML.q.total_fits",
+  "ML.model.DecisionTreeRegressor",
+  "ML.q.intercept",
   "FI.linreg_coef",
-  "EVAL.reg.r2",
+  "EVAL.reg.mae",
   "DL.design_fill",
-  "DL.act.selu",
+  "DL.act.tanh",
   "DL.opt.nadam",
   "DL.units.C",
-  "DL.fit.verbose0",
-  "DLV.plot_fill"
+  "DL.opt.batchnorm",
+  "ANS.token.EarlyStopping",
+  "DLV.plot_fill",
+  "ANS.token.ylabel"
  ],
  "attempts": 1,
  "profile": {
-  "n_rows": 2571,
-  "n_cols": 12,
-  "n_numeric": 8,
+  "n_rows": 1144,
+  "n_cols": 14,
+  "n_numeric": 10,
   "n_object": 4,
-  "na_rate": 0.0084,
+  "na_rate": 0.0144,
   "dup_rows": 0,
   "top_skew": [
-   2.88,
-   2.27,
-   1.03
+   3.48,
+   2.82,
+   2.74
   ],
-  "mean_abs_corr": 0.059,
+  "mean_abs_corr": 0.066,
   "target_balance": {
-   "mean": 1.0,
-   "std": 6.001
+   "mean": 8.178,
+   "std": 3.398
   }
  },
  "selftest": {
@@ -119,39 +135,39 @@
   "index": 12,
   "target": 1.968,
   "band": "초급",
-  "score": 2.53,
+  "score": 2.38,
   "scale": "1(기초)~5(최상), 문항 변형 설계 기준 추정치",
   "slot_ratings": {
    "1": 1,
    "2": 1,
-   "3": 1,
-   "4": 2,
+   "3": 3,
+   "4": 1,
    "5": 2,
    "6": 2,
-   "7": 3,
+   "7": 4,
    "8": 2,
-   "9": 3,
-   "10": 3,
+   "9": 2,
+   "10": 2,
    "11": 3,
-   "12": 3,
+   "12": 2,
    "13": 3,
    "14": 3
   },
   "slot_targets": {
-   "1": 2.07,
-   "2": 1.73,
-   "3": 1.71,
-   "4": 2.09,
-   "5": 1.97,
-   "6": 1.8,
-   "7": 2.18,
-   "8": 2.2,
-   "9": 2.3,
-   "10": 2.19,
-   "11": 2.1,
-   "12": 2.19,
-   "13": 1.91,
-   "14": 1.72
+   "1": 2.2,
+   "2": 1.85,
+   "3": 2.16,
+   "4": 1.77,
+   "5": 1.72,
+   "6": 1.78,
+   "7": 2.4,
+   "8": 1.84,
+   "9": 2.16,
+   "10": 1.92,
+   "11": 1.91,
+   "12": 2.11,
+   "13": 1.86,
+   "14": 2.04
   },
   "knobs": {
    "extra_quirks": 1,
@@ -167,5 +183,233 @@
   "generated_index": 18,
   "generated_target": 2.06,
   "note": "번호는 난이도 점수(score) 오름차순으로 다시 매겼다. generated_* 는 생성 당시의 번호·목표 난이도(세부 설정 knobs 의 기준)."
+ },
+ "learning_meta": {
+  "learningObjectives": [
+   "웰니스안심의 데이터로 수리 소요일을 예측하는 AI 모델을 만들며 데이터 분석·전처리·모델링 전 과정을 수행할 수 있다",
+   "분석에 필요한 파이썬 라이브러리를 관용 별칭으로 불러올 수 있다",
+   "CSV 파일을 데이터프레임으로 읽고 행·열 구성을 확인할 수 있다",
+   "그래프로 변수의 분포와 관계를 시각화할 수 있다",
+   "집계·통계량으로 데이터의 특징을 탐색할 수 있다",
+   "사분위 범위(IQR) 등의 기준으로 이상치를 찾아 처리할 수 있다",
+   "결측치를 확인하고 삭제하거나 대체할 수 있다",
+   "범주형 변수를 인코딩하고 변수를 정리·변환할 수 있다",
+   "피처와 레이블을 나누고 훈련·검증 데이터로 분할할 수 있다",
+   "훈련 데이터로 스케일러를 학습해 검증 데이터에 같은 기준을 적용할 수 있다",
+   "머신러닝 모델에 하이퍼파라미터를 지정해 학습하고 결과를 확인할 수 있다",
+   "변수 중요도·계수로 모델이 어떤 변수에 의존하는지 해석할 수 있다",
+   "평가 지표로 두 모델의 성능을 비교할 수 있다",
+   "주어진 구조대로 Keras 딥러닝 모델을 구성하고 학습할 수 있다",
+   "학습 기록으로 딥러닝 모델의 학습 과정과 성능을 분석할 수 있다"
+  ],
+  "competencyFramework": "AICE Associate 역량 체계(v6 초급): 평가 영역 3개(데이터 분석 20점·데이터 전처리 30점·AI 모델링 50점) × 세부 역량 14개",
+  "competencies": [
+   {
+    "code": "DA1",
+    "area": "데이터 분석",
+    "name": "분석 환경 구성",
+    "questions": [
+     1
+    ]
+   },
+   {
+    "code": "DA2",
+    "area": "데이터 분석",
+    "name": "데이터 불러오기·구조 파악",
+    "questions": [
+     2
+    ]
+   },
+   {
+    "code": "DA3",
+    "area": "데이터 분석",
+    "name": "탐색적 데이터 분석",
+    "questions": [
+     4
+    ]
+   },
+   {
+    "code": "DA4",
+    "area": "데이터 분석",
+    "name": "데이터 시각화",
+    "questions": [
+     3
+    ]
+   },
+   {
+    "code": "DP1",
+    "area": "데이터 전처리",
+    "name": "이상치 처리",
+    "questions": [
+     5
+    ]
+   },
+   {
+    "code": "DP2",
+    "area": "데이터 전처리",
+    "name": "결측치 처리",
+    "questions": [
+     6
+    ]
+   },
+   {
+    "code": "DP3",
+    "area": "데이터 전처리",
+    "name": "인코딩·변수 변환",
+    "questions": [
+     7
+    ]
+   },
+   {
+    "code": "DP4",
+    "area": "데이터 전처리",
+    "name": "데이터 분할",
+    "questions": [
+     8
+    ]
+   },
+   {
+    "code": "DP5",
+    "area": "데이터 전처리",
+    "name": "스케일링",
+    "questions": [
+     9
+    ]
+   },
+   {
+    "code": "AM1",
+    "area": "AI 모델링",
+    "name": "머신러닝 모델 학습·탐색",
+    "questions": [
+     10
+    ]
+   },
+   {
+    "code": "AM2",
+    "area": "AI 모델링",
+    "name": "모델 해석",
+    "questions": [
+     11
+    ]
+   },
+   {
+    "code": "AM3",
+    "area": "AI 모델링",
+    "name": "모델 성능 평가",
+    "questions": [
+     12
+    ]
+   },
+   {
+    "code": "AM4",
+    "area": "AI 모델링",
+    "name": "딥러닝 모델 구성·학습",
+    "questions": [
+     13
+    ]
+   },
+   {
+    "code": "AM5",
+    "area": "AI 모델링",
+    "name": "딥러닝 학습 결과 분석",
+    "questions": [
+     14
+    ]
+   }
+  ],
+  "skills": {
+   "pandas": [
+    "import pandas as pd",
+    "read_csv",
+    "head",
+    "tail",
+    "quantile",
+    "drop",
+    "reset_index",
+    "dropna",
+    "sum",
+    "isnull",
+    "loc",
+    "value_counts",
+    "isin",
+    "get_dummies",
+    "info",
+    "sort_values",
+    "Series",
+    "columns",
+    "shape"
+   ],
+   "NumPy": [
+    "import numpy as np",
+    "abs"
+   ],
+   "seaborn": [
+    "import seaborn as sns",
+    "scatterplot",
+    "kdeplot"
+   ],
+   "matplotlib": [
+    "subplots",
+    "show",
+    "plot",
+    "title",
+    "xlabel",
+    "ylabel",
+    "legend"
+   ],
+   "scikit-learn": [
+    "train_test_split",
+    "StandardScaler",
+    "fit_transform",
+    "transform",
+    "LinearRegression",
+    "fit",
+    "DecisionTreeRegressor",
+    "coef_",
+    "predict",
+    "mean_absolute_error"
+   ],
+   "TensorFlow(Keras)": [
+    "Sequential",
+    "EarlyStopping",
+    "compile",
+    "fit",
+    "Dense",
+    "BatchNormalization",
+    "Dropout",
+    "history"
+   ]
+  },
+  "difficulty": {
+   "level": "초급",
+   "score": 2.38,
+   "scale": "1(기초)~5(최상) 설계 난이도 점수",
+   "questionRatings": {
+    "1": 1,
+    "2": 1,
+    "3": 3,
+    "4": 1,
+    "5": 2,
+    "6": 2,
+    "7": 4,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 3,
+    "12": 2,
+    "13": 3,
+    "14": 3
+   }
+  },
+  "estMinutes": 107,
+  "estMinutesNote": "영역 기본 시간(분석 4·전처리 6·모델링 8분) + 2×(문항 난이도−2) + 작업 셀 2분 + 딥러닝 학습 3분. 실증 데이터로 보정 필요",
+  "domain": {
+   "key": "insurance",
+   "title": "자동차보험 청구 분석",
+   "industry": "금융·보험",
+   "company": "웰니스안심",
+   "task": "수리 소요일을 예측",
+   "target": "수리 소요일"
+  }
  }
 }
